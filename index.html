@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagina Vuota</title>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap" rel="stylesheet">
   <script src="/_sdk/element_sdk.js"></script>
   <style>
     body {
@@ -30,81 +29,17 @@
       background-position: center;
       background-repeat: no-repeat;
       overflow: auto;
-      position: relative;
     }
     
-    .page-container > img {
-      display: none;
-    }
-    
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      padding: 2rem;
-      position: absolute;
-      top: 25%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-    }
-    
-    .logo {
-      max-width: 300px;
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    
-    .content-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 2rem;
-      z-index: 5;
-    }
-    
-    .text-wrapper {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .neon-text {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 85.6px;
-      color: #00ffff;
-      text-align: center;
-      text-shadow: 
-        0 0 10px #00ffff,
-        0 0 20px #00ffff,
-        0 0 30px #00ffff,
-        0 0 40px #00ffff,
-        0 0 70px #00ffff,
-        0 0 80px #00ffff,
-        0 0 100px #00ffff;
-    }
-    
-    .blue-text {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 85.6px;
-      color: #0000ff;
-      text-align: center;
+    .page-container::before {
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-    }
-    
-    @media (max-width: 768px) {
-      .neon-text {
-        font-size: 60px;
-      }
-      .blue-text {
-        font-size: 60px;
-      }
-      .logo {
-        max-width: 250px;
-      }
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0);
+      pointer-events: none;
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
@@ -112,55 +47,19 @@
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body class="h-full">
-  <div class="page-container"><img src="https://raw.githubusercontent.com/mariocassetta17/immagini-app-arco/refs/heads/main/Sfondo%20app%20arco.png" alt="Sfondo" onerror="this.src=''; this.alt='Immagine di sfondo non disponibile'; this.style.display='none';">
-   <div class="logo-container"><img src="https://raw.githubusercontent.com/mariocassetta17/immagini-app-arco/refs/heads/main/logo-app.png" alt="Logo" class="logo" onerror="this.src=''; this.alt='Logo non disponibile';">
-   </div>
-   <div class="content-container">
-    <div class="text-wrapper">
-     <h1 class="neon-text" id="mainText">BENVENUTO!</h1>
-     <h1 class="blue-text" id="blueText">BENVENUTO!</h1>
-    </div>
-   </div>
-  </div>
+  <div class="page-container"></div>
   <script>
     const defaultConfig = {
-      main_text: "BENVENUTO!",
-      text_color: "#00ffff"
+      background_opacity: 0
     };
 
     async function onConfigChange(config) {
-      const mainText = document.getElementById('mainText');
-      const blueText = document.getElementById('blueText');
-      
-      if (mainText && blueText) {
-        const text = config.main_text || defaultConfig.main_text;
-        mainText.textContent = text;
-        blueText.textContent = text;
-        
-        mainText.style.color = config.text_color || defaultConfig.text_color;
-        
-        const color = config.text_color || defaultConfig.text_color;
-        mainText.style.textShadow = `
-          0 0 10px ${color},
-          0 0 20px ${color},
-          0 0 30px ${color},
-          0 0 40px ${color},
-          0 0 70px ${color},
-          0 0 80px ${color},
-          0 0 100px ${color}
-        `;
-      }
+      // Configurazione vuota per ora
     }
 
     function mapToCapabilities(config) {
       return {
-        recolorables: [{
-          get: () => config.text_color || defaultConfig.text_color,
-          set: (value) => {
-            config.text_color = value;
-            window.elementSdk.setConfig({ text_color: value });
-          }
-        }],
+        recolorables: [],
         borderables: [],
         fontEditable: undefined,
         fontSizeable: undefined
@@ -168,17 +67,17 @@
     }
 
     function mapToEditPanelValues(config) {
-      return new Map([
-        ["main_text", config.main_text || defaultConfig.main_text]
-      ]);
+      return new Map();
     }
 
-    window.elementSdk.init({
-      defaultConfig,
-      onConfigChange,
-      mapToCapabilities,
-      mapToEditPanelValues
-    });
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b94aceff2b70e49',t:'MTc2NzYzMzkzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b96e64c06640e49',t:'MTc2NzY1NzI1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
