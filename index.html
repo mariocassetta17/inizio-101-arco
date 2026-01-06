@@ -106,16 +106,21 @@
       font-size: 24px;
       color: #0000ff;
       text-shadow: 
-        0 0 5px #ff00ff,
-        0 0 10px #ff00ff,
-        0 0 15px #ff00ff,
-        0 0 20px #ff00ff,
-        0 0 30px #ff00ff,
-        0 0 40px #ff00ff;
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 15px #00ffff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff,
+        0 0 40px #00ffff;
     }
     
     .inner-rectangle:hover {
-      background-color: #f0f0f0;
+      background-color: #ff00ff;
+      transform: scale(1.05);
+    }
+    
+    .inner-rectangle:hover .button-text {
+      color: #ffffff;
     }
     
     .content-wrapper {
@@ -146,7 +151,10 @@
       background-color: #ffffff;
       border-radius: 20px;
       padding: 40px;
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+      box-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff;
       text-align: center;
       max-width: 400px;
       width: 90%;
@@ -157,6 +165,13 @@
       font-size: 24px;
       color: #0000ff;
       margin-bottom: 30px;
+      text-shadow: 
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 15px #00ffff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff,
+        0 0 40px #00ffff;
     }
     
     .modal-buttons {
@@ -170,11 +185,16 @@
       border: 2px solid #ff00ff;
       border-radius: 50px;
       padding: 15px 40px;
-      font-family: 'Archivo Black', sans-serif;
+      font-family: 'Questrial', sans-serif;
       font-size: 18px;
       color: #0000ff;
       cursor: pointer;
       transition: all 0.3s ease;
+      text-shadow: 
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 15px #00ffff,
+        0 0 20px #00ffff;
     }
     
     .modal-button:hover {
@@ -201,7 +221,7 @@
   </div>
   <div class="modal-overlay" id="modalOverlay">
    <div class="modal-content">
-    <h2 class="modal-title">Seleziona il tuo sistema</h2>
+    <h2 class="modal-title">SELEZIONA IL TUO SISTEMA OPERATIVO</h2>
     <div class="modal-buttons"><button class="modal-button" id="androidBtn">Android</button> <button class="modal-button" id="iosBtn">iOS</button>
     </div>
    </div>
@@ -298,5 +318,5 @@
       }
     });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b973754876b5267',t:'MTc2NzY2MDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b9743df62095267',t:'MTc2NzY2MTA4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
