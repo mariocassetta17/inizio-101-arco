@@ -6,6 +6,8 @@
   <title>Pagina Vuota</title>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+    
     body {
       box-sizing: border-box;
     }
@@ -29,17 +31,39 @@
       background-position: center;
       background-repeat: no-repeat;
       overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
-    .page-container::before {
-      content: '';
+    .logo-container {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0);
-      pointer-events: none;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+    
+    .logo {
+      max-width: 200px;
+      height: auto;
+      display: block;
+    }
+    
+    .neon-text {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 85.6px;
+      color: #0000ff;
+      text-align: center;
+      text-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff,
+        0 0 40px #00ffff,
+        0 0 70px #00ffff,
+        0 0 80px #00ffff,
+        0 0 100px #00ffff,
+        0 0 150px #00ffff;
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
@@ -47,7 +71,11 @@
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body class="h-full">
-  <div class="page-container"></div>
+  <div class="page-container">
+   <div class="logo-container"><img src="https://raw.githubusercontent.com/mariocassetta17/immagini-app-arco/refs/heads/main/logo-app.png" alt="Logo" class="logo" onerror="this.src=''; this.alt='Logo non disponibile'; this.style.display='none';">
+   </div>
+   <h1 class="neon-text">BENVENUTO!</h1>
+  </div>
   <script>
     const defaultConfig = {
       background_opacity: 0
@@ -79,5 +107,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b96e64c06640e49',t:'MTc2NzY1NzI1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b96f15542f6ed53',t:'MTc2NzY1NzcwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
