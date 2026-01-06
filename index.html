@@ -7,6 +7,7 @@
   <script src="/_sdk/element_sdk.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
     
     body {
       box-sizing: border-box;
@@ -34,6 +35,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
     }
     
     .logo-container {
@@ -65,6 +67,120 @@
         0 0 80px #00ffff,
         0 0 100px #00ffff,
         0 0 150px #00ffff;
+      margin-bottom: 40px;
+    }
+    
+    .neon-rectangle {
+      background-color: #ffffff;
+      border-radius: 100px;
+      width: 300px;
+      height: 80px;
+      box-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff,
+        0 0 40px #00ffff,
+        0 0 60px #00ffff,
+        0 0 80px #00ffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+    
+    .inner-rectangle {
+      background-color: #ffffff;
+      border: 1px solid #ff00ff;
+      border-radius: 100px;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .button-text {
+      font-family: 'Questrial', sans-serif;
+      font-size: 24px;
+      color: #0000ff;
+      text-shadow: 
+        0 0 5px #ff00ff,
+        0 0 10px #ff00ff,
+        0 0 15px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 30px #ff00ff,
+        0 0 40px #ff00ff;
+    }
+    
+    .inner-rectangle:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .content-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background-color: #ffffff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+    
+    .modal-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 24px;
+      color: #0000ff;
+      margin-bottom: 30px;
+    }
+    
+    .modal-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    
+    .modal-button {
+      background-color: #ffffff;
+      border: 2px solid #ff00ff;
+      border-radius: 50px;
+      padding: 15px 40px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 18px;
+      color: #0000ff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-button:hover {
+      background-color: #ff00ff;
+      color: #ffffff;
+      transform: scale(1.05);
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
@@ -75,7 +191,20 @@
   <div class="page-container">
    <div class="logo-container"><img src="https://raw.githubusercontent.com/mariocassetta17/immagini-app-arco/refs/heads/main/logo-app.png" alt="Logo" class="logo" onerror="this.src=''; this.alt='Logo non disponibile'; this.style.display='none';">
    </div>
-   <h1 class="neon-text">BENVENUTO!</h1>
+   <div class="content-wrapper">
+    <h1 class="neon-text">BENVENUTO!</h1>
+    <div class="neon-rectangle">
+     <div class="inner-rectangle" id="clickableButton"><span class="button-text">Scarica l'APP!</span>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="modal-overlay" id="modalOverlay">
+   <div class="modal-content">
+    <h2 class="modal-title">Seleziona il tuo sistema</h2>
+    <div class="modal-buttons"><button class="modal-button" id="androidBtn">Android</button> <button class="modal-button" id="iosBtn">iOS</button>
+    </div>
+   </div>
   </div>
   <script>
     const defaultConfig = {
@@ -107,6 +236,67 @@
         mapToEditPanelValues
       });
     }
+
+    // Link per Android e iOS
+    const ANDROID_LINK = 'https://play.google.com/store'; // Link 1 - Sostituisci con il tuo link Android
+    const IOS_LINK = 'https://apps.apple.com/'; // Link 2 - Sostituisci con il tuo link iOS
+
+    // Funzione per rilevare il sistema operativo
+    function detectOS() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      
+      // Rileva iOS
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return 'iOS';
+      }
+      
+      // Rileva Android
+      if (/android/i.test(userAgent)) {
+        return 'Android';
+      }
+      
+      return 'Unknown';
+    }
+
+    // Funzione per aprire il link
+    function openLink(os) {
+      if (os === 'iOS') {
+        window.open(IOS_LINK, '_blank', 'noopener,noreferrer');
+      } else if (os === 'Android') {
+        window.open(ANDROID_LINK, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    // Gestione click sul bottone principale
+    document.getElementById('clickableButton').addEventListener('click', function() {
+      const os = detectOS();
+      
+      if (os === 'Unknown') {
+        // Mostra il modal per la selezione manuale
+        document.getElementById('modalOverlay').classList.add('active');
+      } else {
+        // Apri direttamente il link corretto
+        openLink(os);
+      }
+    });
+
+    // Gestione click sui bottoni del modal
+    document.getElementById('androidBtn').addEventListener('click', function() {
+      openLink('Android');
+      document.getElementById('modalOverlay').classList.remove('active');
+    });
+
+    document.getElementById('iosBtn').addEventListener('click', function() {
+      openLink('iOS');
+      document.getElementById('modalOverlay').classList.remove('active');
+    });
+
+    // Chiudi il modal cliccando fuori
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+      }
+    });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b97223aa7550e49',t:'MTc2NzY1OTcwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b973754876b5267',t:'MTc2NzY2MDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
