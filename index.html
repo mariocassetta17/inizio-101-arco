@@ -1,327 +1,141 @@
-<!doctype html>
-<html lang="it" class="h-full">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0000ff">
-  <title>Benvenuti!</title>
-  <script src="/_sdk/element_sdk.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
-    
-    body {
-      box-sizing: border-box;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    html, body {
-      height: 100%;
-      width: 100%;
-      overflow-x: hidden;
-      position: fixed;
-      left: 0;
-      right: 0;
-    }
-    
-    .page-container {
-      width: 100%;
-      height: 100%;
-      background-image: url('https://raw.githubusercontent.com/mariocassetta17/immagini-app-arco/refs/heads/main/Sfondo%20app%20arco.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      overflow: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    
-    .logo-container {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-    }
-    
-    .logo {
-      max-width: 250px;
-      height: auto;
-      display: block;
-    }
-    
-    .neon-text {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: clamp(45px, 9vw, 100px);
-      color: #0000ff;
-      text-align: center;
-      padding: 0 20px;
-      text-shadow: 
-        0 0 10px #00ffff,
-        0 0 20px #00ffff,
-        0 0 30px #00ffff,
-        0 0 40px #00ffff,
-        0 0 70px #00ffff,
-        0 0 80px #00ffff,
-        0 0 100px #00ffff,
-        0 0 150px #00ffff;
-      margin-bottom: 80px;
-    }
-    
-    .neon-rectangle {
-      background-color: #ffffff;
-      border-radius: 100px;
-      width: 300px;
-      height: 80px;
-      box-shadow: 
-        0 0 10px #00ffff,
-        0 0 20px #00ffff,
-        0 0 30px #00ffff,
-        0 0 40px #00ffff,
-        0 0 60px #00ffff,
-        0 0 80px #00ffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-    }
-    
-    .inner-rectangle {
-      background-color: #ffffff;
-      border: 1px solid #ff00ff;
-      border-radius: 100px;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .button-text {
-      font-family: 'Questrial', sans-serif;
-      font-size: 24px;
-      color: #0000ff;
-      text-shadow: 
-        0 0 5px #00ffff,
-        0 0 10px #00ffff,
-        0 0 15px #00ffff,
-        0 0 20px #00ffff,
-        0 0 30px #00ffff,
-        0 0 40px #00ffff;
-    }
-    
-    .inner-rectangle:hover {
-      background-color: #ff00ff;
-      transform: scale(1.05);
-    }
-    
-    .inner-rectangle:hover .button-text {
-      color: #ffffff;
-    }
-    
-    .content-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .modal-overlay.active {
-      display: flex;
-    }
-    
-    .modal-content {
-      background-color: #ffffff;
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 
-        0 0 10px #00ffff,
-        0 0 20px #00ffff,
-        0 0 30px #00ffff;
-      text-align: center;
-      max-width: 400px;
-      width: 90%;
-    }
-    
-    .modal-title {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 24px;
-      color: #0000ff;
-      margin-bottom: 30px;
-      text-shadow: 
-        0 0 5px #00ffff,
-        0 0 10px #00ffff,
-        0 0 15px #00ffff,
-        0 0 20px #00ffff,
-        0 0 30px #00ffff,
-        0 0 40px #00ffff;
-    }
-    
-    .modal-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-    }
-    
-    .modal-button {
-      background-color: #ffffff;
-      border: 2px solid #ff00ff;
-      border-radius: 50px;
-      padding: 15px 40px;
-      font-family: 'Questrial', sans-serif;
-      font-size: 18px;
-      color: #0000ff;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-shadow: 
-        0 0 5px #00ffff,
-        0 0 10px #00ffff,
-        0 0 15px #00ffff,
-        0 0 20px #00ffff;
-    }
-    
-    .modal-button:hover {
-      background-color: #ff00ff;
-      color: #ffffff;
-      transform: scale(1.05);
-    }
-  </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
- </head>
- <body class="h-full">
-  <div class="page-container">
-   <div class="logo-container"><img src="https://raw.githubusercontent.com/mariocassetta17/immagini-app-arco/refs/heads/main/logo-app.png" alt="Logo" class="logo" onerror="this.src=''; this.alt='Logo non disponibile'; this.style.display='none';">
-   </div>
-   <div class="content-wrapper">
-    <h1 class="neon-text">BENVENUTO!</h1>
-    <div class="neon-rectangle">
-     <div class="inner-rectangle" id="clickableButton"><span class="button-text">Scarica l'APP!</span>
-     </div>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuratore Quadro Elettrico 3D</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; background: #1a1a1a; color: white; }
+        #ui-container { position: absolute; top: 20px; left: 20px; z-index: 10; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; border: 1px solid #444; width: 250px; }
+        h2 { margin-top: 0; font-size: 18px; color: #00ffcc; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
+        button { background: #333; color: white; border: 1px solid #555; padding: 10px; cursor: pointer; border-radius: 5px; transition: 0.3s; text-align: left; }
+        button:hover { background: #00ffcc; color: black; }
+        #info { position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.6); padding: 10px; font-size: 12px; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+
+<div id="ui-container">
+    <h2>Componenti</h2>
+    <div class="btn-group">
+        <button onclick="addModule('C5', 0x3498db, 1)">+ Interruttore C5 (1 mod)</button>
+        <button onclick="addModule('D100', 0xe74c3c, 2)">+ Interruttore D100 (2 mod)</button>
+        <button onclick="addModule('Timer', 0xf1c40f, 1)">+ Timer Digitale (1 mod)</button>
+        <button onclick="addModule('Presa', 0x95a5a6, 2)">+ Presa Servizio (2 mod)</button>
+        <button onclick="clearPanel()" style="margin-top:20px; border-color: #ff4444;">Svuota Quadro</button>
     </div>
-   </div>
-  </div>
-  <div class="modal-overlay" id="modalOverlay">
-   <div class="modal-content">
-    <h2 class="modal-title">SELEZIONA IL TUO SISTEMA OPERATIVO</h2>
-    <div class="modal-buttons"><button class="modal-button" id="androidBtn">Android</button> <button class="modal-button" id="iosBtn">iOS</button>
-    </div>
-   </div>
-  </div>
-  <script>
-    const defaultConfig = {
-      background_opacity: 0
-    };
+</div>
 
-    async function onConfigChange(config) {
-      // Configurazione vuota per ora
+<div id="info">
+    Usa il <b>Mouse</b> per ruotare (Sinistro) e zoomare (Rotella).<br>
+    I moduli si dispongono automaticamente sulla guida DIN.
+</div>
+
+<script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+</script>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    let scene, camera, renderer, controls;
+    let modules = [];
+    const MOD_WIDTH = 0.5; // Larghezza di 1 modulo DIN in unità 3D
+    let currentX = -4.5; // Punto di partenza sulla guida
+
+    init();
+    animate();
+
+    function init() {
+        // 1. Scena e Camera
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x222222);
+        
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 2, 8);
+
+        // 2. Renderer
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // 3. Luci
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(5, 5, 5).target.position.set(0, 0, 0);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0x404040, 2));
+
+        // 4. Creazione Scocca Quadro
+        const panelGeo = new THREE.BoxGeometry(10, 6, 1);
+        const panelMat = new THREE.MeshPhongMaterial({ color: 0xcccccc });
+        const panel = new THREE.Mesh(panelGeo, panelMat);
+        panel.position.z = -0.6;
+        scene.add(panel);
+
+        // 5. Guida DIN (Rappresentata come barra metallica)
+        const dinGeo = new THREE.BoxGeometry(9.5, 0.4, 0.2);
+        const dinMat = new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8 });
+        const dinRail = new THREE.Mesh(dinGeo, dinMat);
+        scene.add(dinRail);
+
+        // 6. Controlli
+        controls = new OrbitControls(camera, renderer.domElement);
+        
+        window.addEventListener('resize', onWindowResize, false);
     }
 
-    function mapToCapabilities(config) {
-      return {
-        recolorables: [],
-        borderables: [],
-        fontEditable: undefined,
-        fontSizeable: undefined
-      };
+    // Funzione globale per aggiungere moduli (accessibile dai bottoni)
+    window.addModule = function(name, color, widthUnits) {
+        if (currentX + (widthUnits * MOD_WIDTH) > 4.5) {
+            alert("Spazio esaurito sulla guida DIN!");
+            return;
+        }
+
+        const width = widthUnits * MOD_WIDTH;
+        const geo = new THREE.BoxGeometry(width - 0.05, 1.2, 0.8);
+        const mat = new THREE.MeshPhongMaterial({ color: color });
+        const mod = new THREE.Mesh(geo, mat);
+
+        // Posizionamento: si sposta l'origine del modulo per affiancarlo correttamente
+        mod.position.x = currentX + (width / 2);
+        mod.position.y = 0;
+        mod.position.z = 0.4;
+
+        // Aggiungi un'etichetta visiva semplice (simulata con un wireframe sopra)
+        const edge = new THREE.EdgesGeometry(geo);
+        const line = new THREE.LineSegments(edge, new THREE.LineBasicMaterial({ color: 0xffffff }));
+        mod.add(line);
+
+        scene.add(mod);
+        modules.push(mod);
+        currentX += width;
     }
 
-    function mapToEditPanelValues(config) {
-      return new Map();
+    window.clearPanel = function() {
+        modules.forEach(m => scene.remove(m));
+        modules = [];
+        currentX = -4.5;
     }
 
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange,
-        mapToCapabilities,
-        mapToEditPanelValues
-      });
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
-    // Link per Android e iOS
-    const ANDROID_LINK = 'https://github.com/mariocassetta17/installa-app-aro/releases/download/v1.0/app-debug.apk';
-    const IOS_LINK = 'https://apps.apple.com/'; // Link 2 - Sostituisci con il tuo link iOS
-
-    // Funzione per rilevare il sistema operativo
-    function detectOS() {
-      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      
-      // Rileva iOS
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return 'iOS';
-      }
-      
-      // Rileva Android
-      if (/android/i.test(userAgent)) {
-        return 'Android';
-      }
-      
-      return 'Unknown';
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
     }
-
-    // Funzione per aprire il link
-    function openLink(os) {
-      if (os === 'iOS') {
-        window.open(IOS_LINK, '_blank', 'noopener,noreferrer');
-      } else if (os === 'Android') {
-        window.open(ANDROID_LINK, '_blank', 'noopener,noreferrer');
-      }
-    }
-
-    // Gestione click sul bottone principale
-    document.getElementById('clickableButton').addEventListener('click', function() {
-      const os = detectOS();
-      
-      if (os === 'Unknown') {
-        // Mostra il modal per la selezione manuale
-        document.getElementById('modalOverlay').classList.add('active');
-      } else {
-        // Apri direttamente il link corretto
-        openLink(os);
-      }
-    });
-
-    // Gestione click sui bottoni del modal
-    document.getElementById('androidBtn').addEventListener('click', function() {
-      openLink('Android');
-      document.getElementById('modalOverlay').classList.remove('active');
-    });
-
-    document.getElementById('iosBtn').addEventListener('click', function() {
-      openLink('iOS');
-      document.getElementById('modalOverlay').classList.remove('active');
-    });
-
-    // Chiudi il modal cliccando fuori
-    document.getElementById('modalOverlay').addEventListener('click', function(e) {
-      if (e.target === this) {
-        this.classList.remove('active');
-      }
-    });
-  </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b9c9b5f611cea3c',t:'MTc2NzcxNzA5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</script>
+</body>
 </html>
